@@ -1,0 +1,144 @@
+{
+    "firstRun": true,
+    "version": "0.13.0",
+    "enabledModels": [],
+    "speech": "google|zh-cn",
+    "target": "pinyin",
+    "fields": {
+        "hanzi": [
+            "Chinese",
+            "Expression",
+            "Hanzi",
+            "中文",
+            "汉字",
+            "漢字"
+        ],
+        "english": [
+            "English",
+            "英文",
+            "英語",
+            "英语"
+        ],
+        "german": [
+            "German",
+            "Deutsch",
+            "德文",
+            "德語",
+            "德语"
+        ],
+        "french": [
+            "French",
+            "le français",
+            "法文",
+            "法語",
+            "法语"
+        ],
+        "pinyin": [
+            "Pinyin",
+            "Reading",
+            "大陆拼音",
+            "大陸拼音",
+            "拼音"
+        ],
+        "pinyinTaiwan": [
+            "Pinyin (Taiwan)",
+            "台湾拼音",
+            "台灣拼音",
+            "臺灣拼音"
+        ],
+        "cantonese": [
+            "Cantonese",
+            "广东话",
+            "广州话",
+            "廣州話",
+            "廣東話",
+            "粤",
+            "粤拼",
+            "粤语",
+            "粵",
+            "粵拼",
+            "粵語"
+        ],
+        "bopomofo": [
+            "Bopomofo",
+            "Zhuyin",
+            "ㄅㄆㄇㄈ",
+            "注音符号",
+            "注音符號",
+            "註音符號"
+        ],
+        "sound": [
+            "Audio",
+            "Sound",
+            "Spoken",
+            "声音",
+            "聲音"
+        ],
+        "mandarinSound": [
+            "Sound (Mandarin)"
+        ],
+        "cantoneseSound": [
+            "Sound (Cantonese)"
+        ],
+        "simplified": [
+            "Simp",
+            "Simp.",
+            "Simplified",
+            "简体",
+            "简体字",
+            "简化",
+            "简化字",
+            "簡化",
+            "簡化字",
+            "簡體",
+            "簡體字"
+        ],
+        "traditional": [
+            "Trad",
+            "Trad.",
+            "Traditional",
+            "繁体",
+            "繁体字",
+            "繁體",
+            "繁體字"
+        ],
+        "classifier": [
+            "Classifier",
+            "Measure Word",
+            "量詞",
+            "量词"
+        ],
+        "alternative": [
+            "Also Written",
+            "Alternative"
+        ],
+        "colorHanzi": [
+            "Color",
+            "Color Hanzi",
+            "Hanzi (Color)",
+            "彩色"
+        ],
+        "ruby": [
+            "Ruby"
+        ],
+        "rubyPinyin": [
+            "Ruby (Pinyin)"
+        ],
+        "rubyPinyinTaiwan": [
+            "Ruby (Taiwan Pinyin)"
+        ],
+        "rubyCantonese": [
+            "Ruby (Cantonese)"
+        ],
+        "rubyBopomofo": [
+            "Ruby (Bopomofo)",
+            "Ruby (Zhuyin)"
+        ],
+        "silhouette": [
+            "Silhouette"
+        ],
+        "frequency": [
+            "Frequency"
+        ]
+    }
+}
