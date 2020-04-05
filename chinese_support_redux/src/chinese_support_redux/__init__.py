@@ -15,6 +15,15 @@
 # You should have received a copy of the GNU General Public License along with
 # Chinese Support Redux.  If not, see <https://www.gnu.org/licenses/>.
 
+
+
+#
+# The files in this addon may have been modified for CCBC, and may not be the same as the original.
+# The files in this addon may have been modified for CCBC, and may not be the same as the original.
+# The files in this addon may have been modified for CCBC, and may not be the same as the original.
+#
+
+
 import sys
 from os.path import dirname, join
 

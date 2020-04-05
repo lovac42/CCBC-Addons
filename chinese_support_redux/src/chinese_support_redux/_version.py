@@ -1,1 +1,7 @@
-__version__ = '0.13.0-beta'
+#
+# The files in this addon may have been modified for CCBC, and may not be the same as the original.
+# The files in this addon may have been modified for CCBC, and may not be the same as the original.
+# The files in this addon may have been modified for CCBC, and may not be the same as the original.
+#
+
+__version__ = '0.15.0-src'

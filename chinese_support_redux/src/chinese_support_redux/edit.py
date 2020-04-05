@@ -18,9 +18,12 @@
 # Chinese Support Redux.  If not, see <https://www.gnu.org/licenses/>.
 
 
-
+#
 # The files in this addon may have been modified for CCBC, and may not be the same as the original.
-
+# The files in this addon may have been modified for CCBC, and may not be the same as the original.
+# The files in this addon may have been modified for CCBC, and may not be the same as the original.
+#
+#
 
 from anki.hooks import addHook
 from aqt import mw
@@ -38,13 +41,14 @@ class EditManager:
     def setupButton(self, editor):
         self.editor = editor
         self.buttonOn = False
-        button = editor._addButton(
-            name='chineseSupport',
+        self.button = editor._addButton(
+            name="chineseSupport",
             func=lambda:self.onToggle(editor),
-            tip='Chinese Support',
-            text='<b>汉字</b>',
-            canDisable=True
+            tip="Chinese Support",
+            text="汉字",
+            check=True,
         )
+        self.button.setFixedWidth(26)
 
     def onToggle(self, editor):
         self.buttonOn = not self.buttonOn
@@ -60,10 +64,8 @@ class EditManager:
 
     def updateButton(self, editor):
         enabled = str(editor.note.model()['id']) in config['enabledModels']
-
         if (enabled and not self.buttonOn) or (not enabled and self.buttonOn):
-            editor.web.eval('toggleEditorButton(chineseSupport);')
-            self.buttonOn = not self.buttonOn
+            self.button.click()
 
     def onFocusLost(self, _, note, index):
         if not self.buttonOn:

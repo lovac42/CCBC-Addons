@@ -15,13 +15,22 @@
 # You should have received a copy of the GNU General Public License along with
 # Chinese Support Redux.  If not, see <https://www.gnu.org/licenses/>.
 
+
+#
+# The files in this addon may have been modified for CCBC, and may not be the same as the original.
+# The files in this addon may have been modified for CCBC, and may not be the same as the original.
+# The files in this addon may have been modified for CCBC, and may not be the same as the original.
+#
+
+
 from PyQt4.QtGui import QDialog, QDialogButtonBox, QLabel, QVBoxLayout
 from aqt import mw
 
 from ._version import __version__
 
 
-CSR_GITHUB_URL = 'https://github.com/luoliyan/chinese-support-redux'
+# CSR_GITHUB_URL = 'https://github.com/luoliyan/chinese-support-redux'
+CSR_GITHUB_URL = 'https://github.com/lovac42/CCBC-Addons'
 
 
 def showAbout():
@@ -31,6 +40,7 @@ def showAbout():
     label.setStyleSheet('QLabel { font-size: 14px; }')
 
     contributors = [
+        'Joseph Lorimer',
         'Alex Griffin',
         'Chris Hatch',
         'Roland Sieker',
@@ -38,9 +48,12 @@ def showAbout():
     ]
 
     text = '''
-<div style="font-weight: bold">Chinese Support Redux v%s</div><br>
+<div style="font-weight: bold">Chinese Support Redux (for CCBC) v%s</div>
+<div>This is a modified version for the CCBC project.<br>
+Bugs and problems may not be related to the original code.<br>
+No support is given, but feel free to ask.</div><br>
 <div><span style="font-weight: bold">
-    Maintainer</span>: Joseph Lorimer &lt;joseph@lorimer.me&gt;</div>
+    Maintainer</span>: lovac42</div>
 <div><span style="font-weight: bold">Contributors</span>: %s</div>
 <div><span style="font-weight: bold">Website</span>: <a href="%s">%s</a></div>
 <div style="font-size: 12px">

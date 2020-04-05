@@ -19,8 +19,11 @@
 
 
 
+#
 # The files in this addon may have been modified for CCBC, and may not be the same as the original.
-
+# The files in this addon may have been modified for CCBC, and may not be the same as the original.
+# The files in this addon may have been modified for CCBC, and may not be the same as the original.
+#
 
 
 from functools import partial
@@ -95,7 +98,7 @@ def load_menu():
         # _('Report a bug or make a feature request'),
         # lambda: openLink(CSR_GITHUB_URL + '/issues'),
     # )
-    # add_menu_item('Chinese Support Redux (CCBC)::Help', _('About...'), showAbout)
+    add_menu_item('Chinese Support Redux (CCBC)', _('About...'), showAbout)
 
 
 def unload_menu():
