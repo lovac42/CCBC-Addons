@@ -7,9 +7,12 @@
 
 from aqt.qt import *
 from anki.hooks import addHook
-from .reading import mecab, srcFields, dstFields
+from .reading import mecab
 from .notetypes import isJapaneseNoteType
 from aqt import mw
+
+from .main import conf
+
 
 # Bulk updates
 ##########################################################################
@@ -26,6 +29,7 @@ def regenerateReadings(nids):
             continue
 
         src = None
+        srcFields = conf.get('srcFields')
         for field in srcFields:
             if field in note:
                 src = field
@@ -35,6 +39,7 @@ def regenerateReadings(nids):
             continue
         # dst is the destination field for the Readings
         dst = None
+        dstFields = conf.get('dstFields')
         for field in dstFields:
             if field in note:
                 dst = field
@@ -58,10 +63,10 @@ def regenerateReadings(nids):
     mw.reset()
 
 def setupMenu(browser):
-    a = QAction("Bulk-add Readings", browser)
+    a = QAction("Japanese Support: Bulk-add Readings", browser)
     a.triggered.connect(lambda: onRegenerate(browser))
-    browser.form.menuEdit.addSeparator()
-    browser.form.menuEdit.addAction(a)
+    browser.form.menuTool.addSeparator()
+    browser.form.menuTool.addAction(a)
 
 def onRegenerate(browser):
     regenerateReadings(browser.selectedNotes())

@@ -1,4 +1,6 @@
 {
+    "speech": null,
+    "audioFields": ["Sound"],
     "noteTypes": ["japanese"],
     "srcFields": ["Expression", "Kanji"],
     "dstFields": ["Reading", "Reading"],

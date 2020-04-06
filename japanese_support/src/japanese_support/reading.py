@@ -7,15 +7,12 @@
 
 import sys, os, re, subprocess
 from anki.utils import stripHTML, isWin, isMac
-from anki.hooks import addHook
-from .notetypes import isJapaneseNoteType
-
+from anki.hooks import addHook, runFilter
 from aqt import mw
-config = mw.addonManager.getConfig(__name__)
 
-srcFields = config['srcFields']
-dstFields = config['dstFields']
-furiganaFieldSuffix = config['furiganaSuffix']
+from .notetypes import isJapaneseNoteType
+from .main import conf
+
 
 kakasiArgs = ["-isjis", "-osjis", "-u", "-JH", "-KH"]
 mecabArgs = ['--node-format=%m[%f[7]] ', '--eos-format=\n',
@@ -201,10 +198,13 @@ def onFocusLost(flag, n, fidx):
     fields = mw.col.models.fieldNames(n.model())
     src = fields[fidx]
     # Retro compatibility
+    srcFields = conf.get('srcFields')
+    dstFields = conf.get('dstFields')
     if src in srcFields:
         srcIdx = srcFields.index(src)
         dst = dstFields[srcIdx]
     else:
+        furiganaFieldSuffix = conf.get('furiganaSuffix')
         dst = src + furiganaFieldSuffix
     if not src or not dst:
         return flag
@@ -224,7 +224,23 @@ def onFocusLost(flag, n, fidx):
     except Exception as e:
         mecab = None
         raise
+
+    source = conf.get('speech')
+    if source:
+        audioFields = conf.get('audioFields')
+        for sndField in audioFields:
+            if sndField in n and not n[sndField]:
+                path = runFilter("AwesomeTTS.speak", srcTxt, "presets", source)
+                if path:
+                    mw.progress.timer(5000,
+                        lambda:mw.col.media.addFile(path), False)
+                    fname = re.split(r"[\\/]", path)[-1]
+                    n[sndField] = '[sound:%s]' % fname
+                break
+
     return True
+
+
 
 # Init
 ##########################################################################

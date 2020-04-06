@@ -16,6 +16,8 @@ def addJapaneseModel(col):
     mm.addField(m, fm)
     fm = mm.newField(("Reading"))
     mm.addField(m, fm)
+    fm = mm.newField(("Sound"))
+    mm.addField(m, fm)
     t = mm.newTemplate(("Recognition"))
     # css
     m['css'] += u"""\

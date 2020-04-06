@@ -3,7 +3,7 @@ set ZIP=C:\PROGRA~1\7-Zip\7z.exe a -tzip -y -r
 set REPO=japanese_support
 set NAME=japanese_support
 set PACKID=japanese_support
-set VERSION=1.0.0
+set VERSION=1.1.0
 
 
 echo %VERSION% >%REPO%\VERSION
