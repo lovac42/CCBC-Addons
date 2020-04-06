@@ -1,0 +1,51 @@
+{
+    "dictionary": "English",
+    "enabledModels": [],
+    "show_startup_tips": false,
+    "debug": false,
+    "speech": null,
+    "startup_tip_number": 0,
+    "transcription": "unknown",
+    "fields": {
+        "hangul": [
+            "Korean",
+            "Expression",
+            "Hangul",
+            "한글",
+            "한국어",
+            "韓國語",
+            "조선말",
+            "朝鮮말"
+        ],
+        "meaning": [
+            "English",
+            "영어",
+            "英語",
+            "Definition",
+            "정의",
+            "定義",
+            "Meaning",
+            "의미",
+            "意味"
+        ],
+        "transcription": [
+            "Reading"
+        ],
+        "hanja": [
+            "Hanja",
+            "한자",
+            "漢字"
+        ],
+        "sound": [
+            "Audio",
+            "오디오",
+            "Sound",
+            "소리",
+            "Spoken",
+            "구두의"
+        ],
+        "silhouette": [
+            "Silhouette"
+        ]
+    }
+}
