@@ -1,0 +1,5 @@
+{
+    "menu_name": "&Stats",
+    "noteTypes": ["japanese"],
+    "srcFields": ["Expression", "Kanji"]
+}
