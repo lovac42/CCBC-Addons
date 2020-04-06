@@ -32,6 +32,7 @@ from PyQt4.QtGui import QKeySequence, QAction, QActionGroup, QMenu
 from anki.lang import _
 from aqt import mw
 from aqt.utils import openLink
+from anki.hooks import runHook
 
 from .about import CSR_GITHUB_URL, showAbout
 from .fill import (
@@ -46,20 +47,17 @@ from .fill import (
 from .main import config
 
 
-SPEECH_ENGINES = {
-    'Baidu Translate': 'baidu|zh',
-    'Google Mandarin (PRC)': 'google|zh-cn',
-    'Google Mandarin (Taiwan)': 'google|zh-tw',
-    'Amazon Polly' : 'aws|Zhiyu',
-    'Disabled': None,
-}
-
 PHONETIC_TARGETS = {
     'Pinyin': 'pinyin',
     'Pinyin (Taiwan)': 'pinyin_tw',
     'Bopomofo': 'bopomofo',
     'Jyutping': 'jyutping',
 }
+
+awesome_config = None
+def getAwesomeConfig(c):
+    global awesome_config
+    awesome_config = c
 
 
 def load_menu():
@@ -72,14 +70,38 @@ def load_menu():
             checked=bool(config['target'] == v),
         )
 
-    for k, v in SPEECH_ENGINES.items():
+    runHook('AwesomeTTS.config', getAwesomeConfig)
+    if awesome_config:
+        for k,v in awesome_config["presets"].items():
+            add_menu_item(
+                'Chinese Support Redux (CCBC)::AwesomeTTS Presets',
+                k,
+                partial(config.update, {'speech': k}),
+                checkable=True,
+                checked=bool(config['speech'] == k),
+            )
+
         add_menu_item(
-            'Chinese Support Redux (CCBC)::Speech Engine',
-            k,
-            partial(config.update, {'speech': v}),
+            "Chinese Support Redux (CCBC)::AwesomeTTS Presets",
+            "Disabled",
+            partial(config.update, {'speech': None}),
             checkable=True,
-            checked=bool(config['speech'] == v),
+            checked=bool(config['speech'] == None),
         )
+        add_menu_item(
+            "Chinese Support Redux (CCBC)::AwesomeTTS Presets",
+            _('  (Refresh Preset List)'), refresh_menu)
+    else:
+        add_menu_item(
+            "Chinese Support Redux (CCBC)::AwesomeTTS Presets",
+            "Disabled",
+            partial(config.update, {'speech': None}),
+            checkable=True,
+            checked=True,
+        )
+        add_menu_item(
+            "Chinese Support Redux (CCBC)::AwesomeTTS Presets",
+            _('  (Refresh Preset List)'), refresh_menu)
 
     add_menu('Chinese Support Redux (CCBC)::Bulk Fill')
     add_menu_item('Chinese Support Redux (CCBC)::Bulk Fill', _('Hanzi'), bulk_fill_hanzi)
@@ -92,12 +114,6 @@ def load_menu():
     add_menu_item('Chinese Support Redux (CCBC)::Bulk Fill', _('Silhouette'), bulk_fill_silhouette)
     add_menu_item('Chinese Support Redux (CCBC)::Bulk Fill', _('All'), bulk_fill_all)
 
-    # add_menu('Chinese Support Redux (CCBC)::Help')
-    # add_menu_item(
-        # 'Chinese Support Redux (CCBC)::Help',
-        # _('Report a bug or make a feature request'),
-        # lambda: openLink(CSR_GITHUB_URL + '/issues'),
-    # )
     add_menu_item('Chinese Support Redux (CCBC)', _('About...'), showAbout)
 
 
@@ -106,6 +122,11 @@ def unload_menu():
         mw.form.menuAddon.removeAction(menu.menuAction())
 
     mw.custom_menus.clear()
+
+
+def refresh_menu():
+    unload_menu()
+    load_menu()
 
 
 def add_menu(path):

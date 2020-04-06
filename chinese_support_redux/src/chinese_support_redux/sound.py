@@ -16,12 +16,25 @@
 # You should have received a copy of the GNU General Public License along with
 # Chinese Support Redux.  If not, see <https://www.gnu.org/licenses/>.
 
+
+
+
+
+#
+# The files in this addon may have been modified for CCBC, and may not be the same as the original.
+# The files in this addon may have been modified for CCBC, and may not be the same as the original.
+# The files in this addon may have been modified for CCBC, and may not be the same as the original.
+#
+
+
+import time, re
+from aqt import mw
 from re import findall, sub
+from anki.hooks import runFilter
 
 from .consts import SOUND_TAG_REGEX
 from .hanzi import has_hanzi
 from .main import config
-from .tts import AudioDownloader
 
 
 def sound(hanzi, source=None):
@@ -38,9 +51,6 @@ def sound(hanzi, source=None):
     if not source:
         return ''
 
-    if source.count('|') != 1:
-        raise ValueError(source)
-
     if has_ruby(hanzi):
         hanzi = ruby_bottom(hanzi)
 
@@ -48,7 +58,12 @@ def sound(hanzi, source=None):
         return ''
 
     if source:
-        return '[sound:%s]' % AudioDownloader(hanzi, source).download()
+        path = runFilter("AwesomeTTS.speak", hanzi, "presets", source)
+        if path:
+            mw.progress.timer(5000,
+                lambda:mw.col.media.addFile(path), False)
+            fname = re.split(r"[\\/]", path)[-1]
+            return '[sound:%s]' % fname
 
     return ''
 
