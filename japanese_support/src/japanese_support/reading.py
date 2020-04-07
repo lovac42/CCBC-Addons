@@ -180,14 +180,52 @@ class KakasiController(object):
         res = self.kakasi.stdout.readline().rstrip(b'\r\n').decode("sjis", "replace")
         return res
 
+
+
+
+# Editor Hook
+##########################################################################
+
+buttonOn = False
+
+def setupEditorButtons(editor):
+    global buttonOn
+    button = editor._addButton(
+        name="japaneseSupport",
+        func=lambda:onToggle(editor),
+        tip="Japanese Support",
+        text="漢字",
+        check=True,
+    )
+    button.setFixedWidth(26)
+    if buttonOn:
+        buttonOn=False
+        mw.progress.timer(10,
+            lambda:button.click(), False)
+
+
+def onToggle(editor):
+    global buttonOn
+    buttonOn = not buttonOn
+
+    mid = str(editor.note.model()['id'])
+
+    if buttonOn and mid not in conf.get("enabledModels",[]):
+        conf.get('enabledModels',[]).append(mid)
+    elif not buttonOn and mid in conf.get("enabledModels",[]):
+        conf.get("enabledModels",[]).remove(mid)
+
+    conf.save()
+
+
 # Focus lost hook
 ##########################################################################
 
 mecab = None
 
 def onFocusLost(flag, n, fidx):
-    global mecab
-    if not mecab:
+    global mecab, buttonOn
+    if not mecab or not buttonOn:
         return flag
     src = None
     dst = None
@@ -249,6 +287,8 @@ kakasi = KakasiController()
 mecab = MecabController()
 
 addHook('editFocusLost', onFocusLost)
+addHook('setupEditorButtons', setupEditorButtons)
+
 
 # Tests
 ##########################################################################
